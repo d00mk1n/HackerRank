@@ -3,16 +3,13 @@ package hackerRank;
 import java.util.Scanner;
 
 public class SherlockAndSquares {
-	
-	//добавление чисел в массив
 
 	public static void add (int[] tests, int t) 
 	{
 		for (int i = 0; i < tests.length; i++) 
 		{
-			//по условию числа должны быть больше нуля, так что должно сработать 
-			//условие добавлю
-			if (tests[i] == 0) 			{
+			if (tests[i] == 0) 			
+			{
 				tests[i] = t;
 				break;
 			}
@@ -22,14 +19,35 @@ public class SherlockAndSquares {
 	public static void main(String[] args) {
 		
 		Scanner scanner = new Scanner(System.in);
-		
+		if (!scanner.hasNextInt())
+		{
+			System.out.println("incorrect number of tries entered");
+			System.exit(0);
+		}
 		int numberOfTries = scanner.nextInt();
 		
+		if (numberOfTries < 0 || numberOfTries > 100)
+		{
+			System.out.println("incorrect number of tries entered");
+			System.exit(0);
+			}
+	
 		int tests[] = new int[numberOfTries*2];
 		
 		for (int i = 0; i < tests.length; i++)
 		{
-			add (tests, scanner.nextInt());
+			if (!scanner.hasNextInt())
+			{
+				System.out.println("incorrect number format");
+				System.exit(0);
+			}
+			int t = scanner.nextInt();
+			if (t < 0 || t > 1000000000) 
+			{
+				System.out.println("incorrect number entered");
+				System.exit(0);	
+			}
+			add (tests, t);
 		}
 		
 		for (int i = 0; i < tests.length; i++, i++)
@@ -48,12 +66,10 @@ public class SherlockAndSquares {
 					count++;
 				}
 			}
+			
 			System.out.println(count);
 			
 		}
-		
-		
-		
 		
 	}
 
