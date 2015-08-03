@@ -56,6 +56,12 @@ public class SherlockAndSquares {
 			
 			int n1 = tests[i+1];
 			
+			if (n0 > n1)
+			{
+				System.out.println("incorrect period of numbers entered");
+				System.exit(0);
+			}
+			
 			int count = 0;
 			
 			for (int j = n0; j <= n1; j++) 
