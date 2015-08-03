@@ -4,15 +4,6 @@ import java.util.Scanner;
 
 public class ChocolateFeast {
 
-	public static void add(int[] tests, int t) {
-		for (int i = 0; i < tests.length; i++) {
-			if (tests[i] == 0) {
-				tests[i] = t;
-				break;
-			}
-		}
-	}
-
 	public static void main(String[] args) {
 
 		Scanner scanner = new Scanner(System.in);
@@ -22,18 +13,14 @@ public class ChocolateFeast {
 		int[] tests = new int[numberOfTries * 3];
 
 		for (int i = 0; i < tests.length; i++) {
-			add(tests, scanner.nextInt());
+			tests[i] = scanner.nextInt();
 		}
 
 		for (int i = 0; i < tests.length; i += 3) {
+			
 			int count = 0;
-
-			int temp = 0;
-
 			int money = tests[i];
-
 			int cost = tests[i + 1];
-
 			int wrapperCost = tests[i + 2];
 
 			int stock = 0; // текущее количество шоколадок (=оберток) на руках
