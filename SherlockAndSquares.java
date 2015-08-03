@@ -31,25 +31,24 @@ public class SherlockAndSquares {
 		{
 			add (tests, scanner.nextInt());
 		}
-//		for (int i=0; i<tests.length; i++){System.out.println(tests[i]);}
-		int count = 0;
+		
 		for (int i = 0; i < tests.length; i++, i++)
 		{
-			count++;
-			
 			int n0 = tests[i];
 			
 			int n1 = tests[i+1];
+			
+			int count = 0;
 			
 			for (int j = n0; j <= n1; j++) 
 			{
 				double s = Math.sqrt(j);
 				if (s % 1 == 0) 
 				{
-					System.out.println("pair " + count + " has a square for " + s);
+					count++;
 				}
 			}
-			
+			System.out.println(count);
 			
 		}
 		
