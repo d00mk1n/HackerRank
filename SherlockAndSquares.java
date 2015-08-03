@@ -4,15 +4,6 @@ import java.util.Scanner;
 
 public class SherlockAndSquares {
 
-	public static void add(int[] tests, int t) {
-		for (int i = 0; i < tests.length; i++) {
-			if (tests[i] == 0) {
-				tests[i] = t;
-				break;
-			}
-		}
-	}
-
 	public static void main(String[] args) {
 
 		Scanner scanner = new Scanner(System.in);
@@ -39,7 +30,7 @@ public class SherlockAndSquares {
 				System.out.println("incorrect number entered");
 				System.exit(0);
 			}
-			add(tests, t);
+			tests[i] = t;
 		}
 
 		for (int i = 0; i < tests.length; i += 2) {
