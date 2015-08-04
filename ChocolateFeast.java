@@ -8,34 +8,34 @@ public class ChocolateFeast {
 
 		Scanner scanner = new Scanner(System.in);
 
-		int numberOfTries = scanner.nextInt();
+		int numberOfTests = scanner.nextInt();
 
-		int[] tests = new int[numberOfTries * 3];
+		int[] moneys = new int[numberOfTests];
+		int[] costs = new int[numberOfTests];
+		int[] wrapperCosts = new int[numberOfTests];
 
-		for (int i = 0; i < tests.length; i++) {
-			tests[i] = scanner.nextInt();
+		for (int i = 0; i < numberOfTests; i++) {
+			moneys[i] = scanner.nextInt();
+			costs[i] = scanner.nextInt();
+			wrapperCosts[i] = scanner.nextInt();
 		}
 
-		for (int i = 0; i < tests.length; i += 3) {
+		for (int i = 0; i < numberOfTests; i++) {
 			
 			int count = 0;
-			int money = tests[i];
-			int cost = tests[i + 1];
-			int wrapperCost = tests[i + 2];
-
 			int stock = 0; // текущее количество шоколадок (=оберток) на руках
 
-			stock = money / cost;
+			stock = moneys[i] / costs[i];
 
-			if (stock < wrapperCost) {
+			if (stock < wrapperCosts[i]) {
 				System.out.println(stock);
 			}
 
 			else {
-				count = count + (stock - (stock % wrapperCost));
+				count = count + (stock - (stock % wrapperCosts[i]));
 
-				while (stock >= wrapperCost) {
-					stock = stock % wrapperCost + (stock / wrapperCost);
+				while (stock >= wrapperCosts[i]) {
+					stock = stock % wrapperCosts[i] + (stock / wrapperCosts[i]);
 
 					count = count + stock;
 				}
