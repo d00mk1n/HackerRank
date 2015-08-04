@@ -4,6 +4,16 @@ import java.util.Scanner;
 
 public class ChocolateFeast {
 
+	private static int exchange(int stock, int wrapperCost) {
+		if (stock < wrapperCost) {
+			return 0;
+		} else {
+			int chocosGained = stock / wrapperCost;
+			stock = stock % wrapperCost;
+			return chocosGained + exchange(stock + chocosGained, wrapperCost);
+		}
+	}
+
 	public static void main(String[] args) {
 
 		Scanner scanner = new Scanner(System.in);
@@ -21,27 +31,13 @@ public class ChocolateFeast {
 		}
 
 		for (int i = 0; i < numberOfTests; i++) {
-			
+
 			int count = 0;
-			int stock = 0; // текущее количество шоколадок (=оберток) на руках
+			int stock = 0;
 
 			stock = moneys[i] / costs[i];
-
-			if (stock < wrapperCosts[i]) {
-				System.out.println(stock);
-			}
-
-			else {
-				count = count + (stock - (stock % wrapperCosts[i]));
-
-				while (stock >= wrapperCosts[i]) {
-					stock = stock % wrapperCosts[i] + (stock / wrapperCosts[i]);
-
-					count = count + stock;
-				}
-
-				System.out.println(count);
-			}
+			count = stock + exchange(stock, wrapperCosts[i]);
+			System.out.println(count);
 		}
 	}
 }
