@@ -7,8 +7,6 @@ public class PryankaAndToys {
 
 	public static void main(String[] args) {
 
-		System.out.println("start");
-
 		Scanner scanner = new Scanner(System.in);
 
 		int numberOfToys = scanner.nextInt();
