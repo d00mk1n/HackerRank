@@ -12,10 +12,7 @@ public class FunnyString {
 		for (int i = 0; i < strings.length; i++) {
 			strings[i] = scanner.nextLine();
 		}
-		for (int i = 0; i < strings.length; i++) {
-			System.out.println(strings[i]);
-			
-		}
+		
 		for (int i = 0; i < strings.length; i++) {
 			char chars[] = new char[strings[i].length()];
 			int l = 0;
