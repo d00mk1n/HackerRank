@@ -5,18 +5,13 @@ import java.util.Scanner;
 
 public class FansAndBuns {
 
-	static boolean isPartOf(int[] a, int n) {
-		int count = 0;
+	private static boolean isPartOf(int[] a, int n) {
 		for (int i = 0; i < a.length; i++) {
 			if (n == a[i]) {
-				count++;
+				return true; 
 			}
 		}
-		if (count == 0) {
-			return false;
-		} else {
-			return true;
-		}
+		return false;
 	}
 
 	public static void main(String[] args) {
