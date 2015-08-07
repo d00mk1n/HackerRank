@@ -1,32 +1,54 @@
 package hackerRank;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class FansAndBuns {
 
-	static class Fan {
+	static boolean isPartOf(int[] a, int n) {
+		int count = 0;
+		for (int i = 0; i < a.length; i++) {
+			if (n == a[i]) {
+				count++;
+			}
+		}
+		if (count == 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 
-		int time;
-		int dur;
-		int total = time + dur;
-		int num;
+	public static void main(String[] args) {
 
-		public Fan(int time, int dur, int num) {
-			this.time = time;
-			this.dur = dur;
-			this.num = num;
+		Scanner scanner = new Scanner(System.in);
+
+		int numberOfFans = scanner.nextInt();
+		int timesOfOrder[] = new int[numberOfFans];
+		int durations[] = new int[numberOfFans];
+
+		for (int i = 0; i < numberOfFans; i++) {
+			timesOfOrder[i] = scanner.nextInt();
+			durations[i] = scanner.nextInt();
 		}
 
-		public static void main(String[] args) {
+		int totals[] = new int[numberOfFans];
+		int totalsSorted[] = new int[numberOfFans];
+		for (int i = 0; i < totals.length; i++) {
+			totals[i] = timesOfOrder[i] + durations[i];
+			totalsSorted[i] = timesOfOrder[i] + durations[i];
+		}
 
-			Scanner scanner = new Scanner(System.in);
-
-			int numberOfFans = scanner.nextInt();
-
-			Fan[] fans = new Fan[numberOfFans];
-
-			for (int i = 0; i < numberOfFans; i++) {
-				fans[i] = new Fan(scanner.nextInt(), scanner.nextInt(), i);
+		Arrays.sort(totalsSorted);
+		
+		int done[] = new int[numberOfFans];
+		for (int i = 0; i < totalsSorted.length; i++) {
+			for (int j = 0; j < totals.length; j++) {
+				if ((totalsSorted[i] == totals[j]) && !isPartOf(done, totals[j])) {
+					System.out.println(j + 1);
+					totals[j] = done[i];
+					break;
+				}
 			}
 		}
 	}
