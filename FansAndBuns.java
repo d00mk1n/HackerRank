@@ -13,7 +13,6 @@ public class FansAndBuns {
 		}
 		return false;
 	}
-
 	public static void main(String[] args) {
 
 		Scanner scanner = new Scanner(System.in);
@@ -35,8 +34,8 @@ public class FansAndBuns {
 		}
 
 		Arrays.sort(totalsSorted);
-		
 		int done[] = new int[numberOfFans];
+
 		for (int i = 0; i < totalsSorted.length; i++) {
 			for (int j = 0; j < totals.length; j++) {
 				if ((totalsSorted[i] == totals[j]) && !isPartOf(done, totals[j])) {
