@@ -5,14 +5,8 @@ import java.util.Scanner;
 public class FunnyString {
 
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		int numberOfTests = Integer.parseInt(scanner.nextLine());
+		String[] strings = readInput();
 
-		String strings[] = new String[numberOfTests];
-		for (int i = 0; i < strings.length; i++) {
-			strings[i] = scanner.nextLine();
-		}
-		
 		for (int i = 0; i < strings.length; i++) {
 			char chars[] = new char[strings[i].length()];
 			int l = 0;
@@ -37,5 +31,22 @@ public class FunnyString {
 
 			}
 		}
+	}
+
+	private static String[] readInput() {
+		Scanner scanner = new Scanner(System.in);
+		String strings[];
+		try {
+
+			int numberOfTests = Integer.parseInt(scanner.nextLine());
+
+			strings = new String[numberOfTests];
+			for (int i = 0; i < strings.length; i++) {
+				strings[i] = scanner.nextLine();
+			}
+		} finally {
+			scanner.close();
+		}
+		return strings;
 	}
 }
