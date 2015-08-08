@@ -4,39 +4,31 @@ import java.util.Scanner;
 
 public class PileOfSticks {
 	
-	static class Stick {
-		
-		int length;
-		
-		public Stick(int length) {	
-			this.length = length;
-		}
-	}
-	public static void sort(Stick[] pile) {
+	public static void sort(int[] pile) {
 		System.out.println(pile.length);
-		int min = pile[0].length;
+		int min = pile[0];
 		int count = 0;
 		int countUnEven=0;
 		for (int i = 0; i < pile.length; i++) {
-			if (pile[i].length < min) {
-				min = pile[i].length;
+			if (pile[i] < min) {
+				min = pile[i];
 			}
 		}
 		for (int i = 0; i < pile.length; i++) {
-			if (pile[i].length - min > 0) {
+			if (pile[i] - min > 0) {
 				count++;
 			}
 		}
-		Stick[] pile0 = new Stick[count];
+		int[] pile0 = new int[count];
 		int j=0;
 		for (int i = 0; i < pile.length; i++) {
-			if (pile[i].length - min > 0) {
-				pile0[j] = new Stick(pile[i].length - min);
+			if (pile[i] - min > 0) {
+				pile0[j] = pile[i] - min;
 				j++;
 			}
 		}
 		for (int i=0; i < pile0.length; i++) {
-			if (pile0[0].length!=pile0[i].length) {
+			if (pile0[0]!=pile0[i]) {
 				countUnEven++;		
 			}
 		}
@@ -54,9 +46,9 @@ public class PileOfSticks {
 		
 		int numberOfSticks = scanner.nextInt();
 		
-		Stick[] pile = new Stick[numberOfSticks];
+		int[] pile = new int[numberOfSticks];
 		for (int i = 0; i < pile.length; i++) {
-			pile[i] = new Stick(scanner.nextInt());	
+			pile[i] = scanner.nextInt();	
 		}
 		sort(pile);
 	}
