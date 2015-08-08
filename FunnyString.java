@@ -4,13 +4,13 @@ import java.util.Scanner;
 
 public class FunnyString {
 
-	private static String originalString;
+	private final String originalString;
 
 	public FunnyString(String originalString) {
 		this.originalString = originalString;
 	}
 
-	public static boolean isFunny(String originalString) {
+	public boolean isFunny() {
 		String stringR = new StringBuilder(originalString).reverse().toString();
 		for (int j = 1; j < originalString.length(); j++) {
 			int c1 = Math.abs(originalString.charAt(j) - originalString.charAt(j - 1));
@@ -25,7 +25,7 @@ public class FunnyString {
 	public static void main(String[] args) {
 		String[] strings = readInput();
 		for (int i = 0; i < strings.length; i++) {
-			if (isFunny(strings[i])) {
+			if (new FunnyString(strings[i]).isFunny()) {
 				System.out.println("Funny");
 			} else {
 				System.out.println("Not Funny");
@@ -37,7 +37,6 @@ public class FunnyString {
 		Scanner scanner = new Scanner(System.in);
 		String strings[];
 		try {
-
 			int numberOfTests = Integer.parseInt(scanner.nextLine());
 
 			strings = new String[numberOfTests];
