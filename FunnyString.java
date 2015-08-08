@@ -8,13 +8,7 @@ public class FunnyString {
 		String[] strings = readInput();
 
 		for (int i = 0; i < strings.length; i++) {
-			char chars[] = new char[strings[i].length()];
-			int l = 0;
-			for (l = strings[i].length() - 1; l >= 0; l--) {
-				chars[strings[i].length() - 1 - l] = strings[i].charAt(l);
-			}
-			String stringR = new String(chars);
-
+			String stringR = new StringBuilder(strings[i]).reverse().toString();
 			int count = 0;
 
 			for (int j = 1; j < strings[i].length(); j++) {
