@@ -12,9 +12,9 @@ public class FunnyString {
 			int count = 0;
 
 			for (int j = 1; j < strings[i].length(); j++) {
-				int c1 = strings[i].charAt(j) - strings[i].charAt(j - 1);
-				int c2 = stringR.charAt(j) - stringR.charAt(j - 1);
-				if ((c1 != c2) && (c1 != c2 * (-1))) {
+				int c1 = Math.abs(strings[i].charAt(j) - strings[i].charAt(j - 1));
+				int c2 = Math.abs(stringR.charAt(j) - stringR.charAt(j - 1));
+				if (c1 - c2 != 0) {
 					count++;
 				}
 			}
