@@ -17,24 +17,26 @@ public class ChocolateFeast {
 	public static void main(String[] args) {
 
 		Scanner scanner = new Scanner(System.in);
+		try {
+			int numberOfTests = scanner.nextInt();
 
-		int numberOfTests = scanner.nextInt();
+			int[] moneys = new int[numberOfTests];
+			int[] costs = new int[numberOfTests];
+			int[] wrapperCosts = new int[numberOfTests];
 
-		int[] moneys = new int[numberOfTests];
-		int[] costs = new int[numberOfTests];
-		int[] wrapperCosts = new int[numberOfTests];
+			for (int i = 0; i < numberOfTests; i++) {
+				moneys[i] = scanner.nextInt();
+				costs[i] = scanner.nextInt();
+				wrapperCosts[i] = scanner.nextInt();
+			}
 
-		for (int i = 0; i < numberOfTests; i++) {
-			moneys[i] = scanner.nextInt();
-			costs[i] = scanner.nextInt();
-			wrapperCosts[i] = scanner.nextInt();
-		}
-
-		for (int i = 0; i < numberOfTests; i++) {
-
-			int stock = moneys[i] / costs[i];
-		    int count = stock + exchange(stock, wrapperCosts[i]);
-			System.out.println(count);
+			for (int i = 0; i < numberOfTests; i++) {
+				int stock = moneys[i] / costs[i];
+				int count = stock + exchange(stock, wrapperCosts[i]);
+				System.out.println(count);
+			}
+		} finally {
+			scanner.close();
 		}
 	}
 }
