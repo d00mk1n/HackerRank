@@ -5,57 +5,45 @@ import java.util.Scanner;
 public class SherlockAndSquares {
 
 	public static void main(String[] args) {
-
-		Scanner scanner = new Scanner(System.in);
-		if (!scanner.hasNextInt()) {
-			System.out.println("incorrect number of tries entered");
-			System.exit(0);
-		}
-		int numberOfTries = scanner.nextInt();
-
-		if (numberOfTries < 0 || numberOfTries > 100) {
-			System.out.println("incorrect number of tries entered");
-			System.exit(0);
-		}
-
-		int tests[] = new int[numberOfTries * 2];
-
-		for (int i = 0; i < tests.length; i++) {
-			if (!scanner.hasNextInt()) {
-				System.out.println("incorrect number format");
-				System.exit(0);
-			}
-			int t = scanner.nextInt();
-			if (t < 0 || t > 1000000000) {
-				System.out.println("incorrect number entered");
-				System.exit(0);
-			}
-			tests[i] = t;
-		}
+		int[] tests = readInput();
 
 		for (int i = 0; i < tests.length; i += 2) {
 			int n0 = tests[i];
-
 			int n1 = tests[i + 1];
-
-			if (n0 > n1) {
-				System.out.println("incorrect period of numbers entered");
-				System.exit(0);
-			}
-
-			int count = 0;
-
-			for (int j = n0; j <= n1; j++) {
-				double s = Math.sqrt(j);
-				if (s % 1 == 0) {
-					count++;
-				}
-			}
-
-			System.out.println(count);
-
+			System.out.println(new SherlockAndSquares().solve(n0, n1));
 		}
-
 	}
 
+	private int solve(int n0, int n1) {
+		if (n0 > n1) {
+			throw new IllegalArgumentException("incorrect period of numbers entered");
+		}
+		int left = (int) Math.ceil(Math.sqrt(n0));
+		int right = (int) Math.floor(Math.sqrt(n1));
+
+		return right - left + 1;
+	}
+
+	private static int[] readInput() {
+		Scanner scanner = new Scanner(System.in);
+		try {
+			int numberOfTries = scanner.nextInt();
+
+			if (numberOfTries < 0 || numberOfTries > 100) {
+				throw new IllegalArgumentException("number of tests out of range");
+			}
+
+			int tests[] = new int[numberOfTries * 2];
+			for (int i = 0; i < tests.length; i++) {
+				int t = scanner.nextInt();
+				if (t < 0 || t > 1e9) {
+					throw new IllegalArgumentException("T is out of range");
+				}
+				tests[i] = t;
+			}
+			return tests;
+		} finally {
+			scanner.close();
+		}
+	}
 }
