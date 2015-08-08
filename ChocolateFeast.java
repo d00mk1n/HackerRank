@@ -32,11 +32,8 @@ public class ChocolateFeast {
 
 		for (int i = 0; i < numberOfTests; i++) {
 
-			int count = 0;
-			int stock = 0;
-
-			stock = moneys[i] / costs[i];
-			count = stock + exchange(stock, wrapperCosts[i]);
+			int stock = moneys[i] / costs[i];
+		    int count = stock + exchange(stock, wrapperCosts[i]);
 			System.out.println(count);
 		}
 	}
