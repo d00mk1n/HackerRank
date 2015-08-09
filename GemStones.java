@@ -1,47 +1,31 @@
 package hackerRank;
 
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class GemStones {
 
-	public static char[] extChars(String s) {
+	public static Set<Character> extChars(String s) {
 		
-		char[] chars = new char[s.length()];
-		int countChar = 0;
-		
+		Set<Character> chars = new HashSet<Character>();
 		for (int i = 0; i < s.length(); i++) {
-			int count = 0;
-			for (int j = 0; j < chars.length; j++) {
-				if (s.charAt(i) == chars[j]) {
-					count++;
-				}
-			}
-			if (count == 0) {
-				chars[countChar] = s.charAt(i);
-				countChar++;
+			char c = s.charAt(i);
+			if (!chars.contains(c)) {
+				chars.add(c);
 			}
 		}
 		return chars;
 	}
 
-	public static char[] compare(char[] c0, char[] c1) {
-		
-		char[] chars = new char[c0.length];
-		int charCount = 0;
-		
-		for (int i = 0; i < c0.length; i++) {
-			for (int j = 0; j < c1.length; j++) {
-				if (c0[i] == c1[j]) {
-					chars[charCount] = c1[j];
-					if (charCount < chars.length - 1) {
-						charCount++;
-					}
-				}
+	public static Set<Character> compare(Set<Character> c0, Set<Character> c1) {
+		Set<Character> result = new HashSet<>(c0);
+		for(Character c: c0) {
+			if (!c1.contains(c)) {
+				result.remove(c);
 			}
 		}
-
-		return chars;
-
+		return result;
 	}
 
 	public static void main(String[] args) {
@@ -55,19 +39,13 @@ public class GemStones {
 			strings[i] = scanner.nextLine();
 		}
 		
-		char[] chars = extChars(strings[0]);
+		Set<Character> chars = extChars(strings[0]);
 		int i = 1;
 		while (i < numberOfTests) {
 			chars = compare(chars, extChars(strings[i]));
 			i++;
 		}
 
-		int count = 0;
-		for (int j = 0; j < chars.length; j++) {
-			if (chars[j] != 0) {
-				count++;
-			}
-		}
-		System.out.println(count);
+		System.out.println(chars.size());
 	}
 }
