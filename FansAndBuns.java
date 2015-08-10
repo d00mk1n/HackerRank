@@ -1,49 +1,53 @@
 package hackerRank;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class FansAndBuns {
 
-	private static boolean isPartOf(int[] a, int n) {
-		for (int i = 0; i < a.length; i++) {
-			if (n == a[i]) {
-				return true; 
-			}
-		}
-		return false;
-	}
 	public static void main(String[] args) {
 
+		List<Fan> fans = readInput();
+		Collections.sort(fans);
+
+		for (Fan fan : fans) {
+			System.out.print(fan.id + " ");
+		}
+	}
+
+	private static List<Fan> readInput() {
 		Scanner scanner = new Scanner(System.in);
-
 		int numberOfFans = scanner.nextInt();
-		int timesOfOrder[] = new int[numberOfFans];
-		int durations[] = new int[numberOfFans];
+		try {
 
-		for (int i = 0; i < numberOfFans; i++) {
-			timesOfOrder[i] = scanner.nextInt();
-			durations[i] = scanner.nextInt();
-		}
+			List<Fan> fans = new ArrayList<>(numberOfFans);
 
-		int totals[] = new int[numberOfFans];
-		int totalsSorted[] = new int[numberOfFans];
-		for (int i = 0; i < totals.length; i++) {
-			totals[i] = timesOfOrder[i] + durations[i];
-			totalsSorted[i] = timesOfOrder[i] + durations[i];
-		}
-
-		Arrays.sort(totalsSorted);
-		int done[] = new int[numberOfFans];
-
-		for (int i = 0; i < totalsSorted.length; i++) {
-			for (int j = 0; j < totals.length; j++) {
-				if ((totalsSorted[i] == totals[j]) && !isPartOf(done, totals[j])) {
-					System.out.println(j + 1);
-					totals[j] = done[i];
-					break;
-				}
+			for (int i = 0; i < numberOfFans; i++) {
+				int timeOfOrder = scanner.nextInt();
+				int duration = scanner.nextInt();
+				fans.add(new Fan(i + 1, timeOfOrder + duration));
 			}
+			return fans;
+		} finally {
+			scanner.close();
+		}
+	}
+
+	private static class Fan implements Comparable<Fan> {
+		private final int id;
+
+		private final int finishTime;
+
+		private Fan(int id, int finishTime) {
+			this.id = id;
+			this.finishTime = finishTime;
+		}
+
+		@Override
+		public int compareTo(Fan o) {
+			return finishTime - o.finishTime;
 		}
 	}
 }
