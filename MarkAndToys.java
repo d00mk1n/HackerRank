@@ -9,25 +9,30 @@ public class MarkAndToys {
 
 		Scanner scanner = new Scanner(System.in);
 
-		int numberOfToys = scanner.nextInt();
-		int money = scanner.nextInt();
+		try {
+			int numberOfToys = scanner.nextInt();
+			int money = scanner.nextInt();
 
-		int[] toys = new int[numberOfToys];
+			int[] toys = new int[numberOfToys];
 
-		for (int i = 0; i < numberOfToys; i++) {
-			toys[i] = scanner.nextInt();
-		}
+			for (int i = 0; i < numberOfToys; i++) {
+				toys[i] = scanner.nextInt();
+			}
 
-		Arrays.sort(toys);
+			Arrays.sort(toys);
 
-		int sum = 0;
-		int i = 0;
-		while (sum <= money && i < toys.length) {
-			sum = sum + toys[i];
-			if (sum <= money) {
+			int sum = 0;
+			int i = 0;
+			while (i < toys.length) {
+				sum = sum + toys[i];
+				if (sum > money) {
+					break;
+				}
 				i++;
 			}
+			System.out.println(i);
+		} finally {
+			scanner.close();
 		}
-		System.out.println(i);
 	}
 }
