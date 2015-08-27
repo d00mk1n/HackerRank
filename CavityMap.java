@@ -67,6 +67,9 @@ public class CavityMap {
 		public int getHeight(Vertex v) {
 			return v.height;
 		}
+		public String toString(Vertex v) {
+			return isCavity(v) ? "X" : String.valueOf(height);
+		}
 	}
 
 	public static void main(String[] args) {
@@ -76,8 +79,9 @@ public class CavityMap {
 
 		for (int i = 0; i < map.n; i++) {
 			for (int j = 0; j < map.n; j++) {
-				System.out.print(cells[i][j].height);
-			} System.out.println();
+				System.out.print(map.cells[i][j].toString(cells[i][j]));
+			}
+			System.out.println();
 		}
 	}
 
