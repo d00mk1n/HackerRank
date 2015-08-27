@@ -97,7 +97,7 @@ public class CavityMap {
 			int[][] heigth = new int[n][n];
 			for (int i = 0; i < n; i++) {
 				for (int j = 0; j < n; j++) {
-					heigth[i][j] = input[i].charAt(j)-48;
+					heigth[i][j] = Character.getNumericValue(input[i].charAt(j));
 				}
 			}
 			CavityMap map = new CavityMap(n, heigth);
