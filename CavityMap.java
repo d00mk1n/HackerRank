@@ -1,5 +1,6 @@
 package hackerRank;
 
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class CavityMap {
@@ -21,7 +22,7 @@ public class CavityMap {
 		return cells;
 	}
 
-	private static class Vertex {
+	private class Vertex {
 		private final int row;
 		private final int column;
 		private final int height;
@@ -30,6 +31,26 @@ public class CavityMap {
 			this.row = row;
 			this.column = column;
 			this.height = height;
+		}
+		
+		private boolean isOnTheEdge(Vertex v) {
+			if (v.column == 0 || 
+				v.column == n - 1 || 
+				v.row == 0 || 
+				v.row == n - 1) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		public HashSet<Vertex> getNeighbors(Vertex v) {
+			HashSet<Vertex> neighbors = new HashSet<Vertex>();
+			neighbors.add(cells[v.column][v.row - 1]);
+			neighbors.add(cells[v.column + 1][v.row]);
+			neighbors.add(cells[v.column][v.row + 1]);
+			neighbors.add(cells[v.column - 1][v.row]);
+			return neighbors;
 		}
 	}
 
