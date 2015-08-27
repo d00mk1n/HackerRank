@@ -32,7 +32,19 @@ public class CavityMap {
 			this.column = column;
 			this.height = height;
 		}
-		
+		private boolean isCavity(Vertex v) {
+			if (isOnTheEdge(v) == true) {
+				return false;
+			}
+			HashSet<Vertex> neighbors = getNeighbors(v);
+			for (Vertex ver : neighbors) {
+				if (getHeight(v) <= getHeight(ver)) {
+					return false;
+				}
+			}
+			return true;
+
+		}
 		private boolean isOnTheEdge(Vertex v) {
 			if (v.column == 0 || 
 				v.column == n - 1 || 
@@ -51,6 +63,9 @@ public class CavityMap {
 			neighbors.add(cells[v.column][v.row + 1]);
 			neighbors.add(cells[v.column - 1][v.row]);
 			return neighbors;
+		}
+		public int getHeight(Vertex v) {
+			return v.height;
 		}
 	}
 
