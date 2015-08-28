@@ -1,6 +1,7 @@
 package hackerRank;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class CavityMap {
@@ -17,7 +18,11 @@ public class CavityMap {
 			}
 		}
 	}
-
+	
+	public int getN() {
+        return n;
+    }
+	
 	public Vertex[][] getCells() {
 		return cells;
 	}
@@ -32,43 +37,43 @@ public class CavityMap {
 			this.column = column;
 			this.height = height;
 		}
-		private boolean isCavity(Vertex v) {
-			if (isOnTheEdge(v) == true) {
+		private boolean isCavity() {
+			if (isOnTheEdge()) {
 				return false;
 			}
-			HashSet<Vertex> neighbors = getNeighbors(v);
+			List<Vertex> neighbors = getNeighbors();
 			for (Vertex ver : neighbors) {
-				if (getHeight(v) <= getHeight(ver)) {
+				if (getHeight() <= ver.getHeight()) {
 					return false;
 				}
 			}
 			return true;
 
 		}
-		private boolean isOnTheEdge(Vertex v) {
-			if (v.column == 0 || 
-				v.column == n - 1 || 
-				v.row == 0 || 
-				v.row == n - 1) {
-				return true;
-			} else {
-				return false;
-			}
+		private boolean isOnTheEdge() {
+				return column == 0 || 
+						column == n - 1 || 
+						row == 0 || 
+						row == n - 1;
 		}
 
-		public HashSet<Vertex> getNeighbors(Vertex v) {
-			HashSet<Vertex> neighbors = new HashSet<Vertex>();
-			neighbors.add(cells[v.column][v.row - 1]);
-			neighbors.add(cells[v.column + 1][v.row]);
-			neighbors.add(cells[v.column][v.row + 1]);
-			neighbors.add(cells[v.column - 1][v.row]);
+		private List<Vertex> getNeighbors() {
+			if (isOnTheEdge()) {
+                throw new UnsupportedOperationException("Только для внутренних ячеек");
+            }
+			List<Vertex> neighbors = new ArrayList<Vertex>();
+			neighbors.add(cells[row][column - 1]);
+            neighbors.add(cells[row + 1][column]);
+            neighbors.add(cells[row][column + 1]);
+            neighbors.add(cells[row - 1][column]);
 			return neighbors;
 		}
-		public int getHeight(Vertex v) {
-			return v.height;
+		public int getHeight() {
+			return height;
 		}
-		public String toString(Vertex v) {
-			return isCavity(v) ? "X" : String.valueOf(height);
+		@Override
+		public String toString() {
+			return isCavity() ? "X" : String.valueOf(height);
 		}
 	}
 
@@ -79,7 +84,7 @@ public class CavityMap {
 
 		for (int i = 0; i < map.n; i++) {
 			for (int j = 0; j < map.n; j++) {
-				System.out.print(map.cells[i][j].toString(cells[i][j]));
+				System.out.print(cells[i][j]);
 			}
 			System.out.println();
 		}
@@ -88,8 +93,8 @@ public class CavityMap {
 	private static CavityMap readInput() {
 
 		Scanner scanner = new Scanner(System.in);
-		int n = Integer.parseInt(scanner.nextLine());
 		try {
+			int n = Integer.parseInt(scanner.nextLine());
 			String[] input = new String[n];
 			for (int i = 0; i < n; i++) {
 				input[i] = scanner.nextLine();
@@ -100,8 +105,7 @@ public class CavityMap {
 					heigth[i][j] = Character.getNumericValue(input[i].charAt(j));
 				}
 			}
-			CavityMap map = new CavityMap(n, heigth);
-			return map;
+			return new CavityMap(n, heigth);
 		} finally {
 			scanner.close();
 		}
